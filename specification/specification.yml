@@ -1,0 +1,264 @@
+openapi: 3.0.2
+info:
+  title: User feedback service
+  description: A back end service for providing user feedback on resources in the data catalog.
+  version: '1.0'
+  contact:
+    name: Digitaliseringsdirektoratet
+    url: 'https://fellesdatakatalog.digdir.no'
+    email: fellesdatakatalog@digdir.no
+  license:
+    name: License of API
+    url: 'http://data.norge.no/nlod/no/2.0'
+externalDocs:
+  description: Dokumentasjon på Informasjonsforvaltning GitHub
+  url: https://informasjonsforvaltning.github.io
+tags:
+  - name: thread
+    description: A collection of feedback
+  - name: post
+    description: A feedback instance
+servers:
+  - url: 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service'
+    description: production
+  - url: 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service-staging'
+    description: staging
+paths:
+  /ping:
+    get:
+      summary: Responds with 'pong'
+      description: Gets a feedback thread relating to a resrouce
+      operationId: ping
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ping response
+  /thread/{resourceId}:
+    get:
+      tags:
+        - thread
+      summary: Gets a feedback thread relating to a resrouce
+      description: Gets a feedback thread relating to a resrouce
+      operationId: GetComments
+      parameters:
+        - name: resourceId
+          in: path
+          description: resource id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Thread"
+        '400':
+          description: Bad request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - post
+      summary: Create post for specified resource
+      description: Create post for specified resource, create thread if none exists
+      operationId: CreateComment
+      parameters:
+        - name: resourceId
+          in: path
+          description: resource id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not logged in
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /thread/{resourceId}/{postId}:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - post
+      summary: Update post in specified thread
+      description: Update post in specified thread
+      operationId: UpdateComment
+      parameters:
+        - name: resourceId
+          in: path
+          description: resource id
+          required: true
+          schema:
+            type: string
+        - name: postId
+          in: path
+          description: post id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not logged in
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - post
+      summary: Delete post in specified thread
+      description: Delete post in specified thread
+      operationId: DeleteComment
+      parameters:
+        - name: resourceId
+          in: path
+          description: resource id
+          required: true
+          schema:
+            type: string
+        - name: postId
+          in: path
+          description: post id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not logged in
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /current-user:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Gets user information for current authentication
+      description: Gets user information
+      operationId: CurrentUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+
+
+components:
+  schemas:
+    Thread:
+      type: object
+      description: Feedback thread related to a resource
+      properties:
+        ThreadId:
+          type: string
+          description: Id for this thread
+        Title:
+          type: string
+          description: Title of the thread
+        Posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Post'
+        Timestamp:
+          type: string
+          description: Time of creation or last change
+    Post:
+      type: object
+      description: An instance of feedback contained in a thread
+      properties:
+        PostId:
+          type: string
+          description: Id for this post
+        UserId:
+          type: string
+          description: Id for the author of this post
+        ThreadId:
+          type: string
+          description: Id for the thread containing this post
+        Content:
+          type: string
+          description: Id for this post
+        ToPostId:
+          type: string
+          description: Id for the post this post replies
+        Timestamp:
+          type: string
+          description: Time of creation or last change
+    User:
+      type: object
+      description: User information
+      properties:
+        UserId:
+          type: number
+          description: Id of current user
+        Username:
+          type: string
+          description: Username of current user
+        Displayname:
+          type: string
+          description: Displayname of current user, same as username
+        Userslug:
+          type: string
+          description: Slug of current user
+        Picture:
+          type: string
+          description: Profile picture of current user
+        IconText:
+          type: string
+          description: Icon placeholder letter for current user
+        IconBgColor:
+          type: string
+          description: Color related to user
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
