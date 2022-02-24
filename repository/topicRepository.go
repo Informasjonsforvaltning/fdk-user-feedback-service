@@ -10,7 +10,7 @@ import (
 )
 
 type ThreadRepository interface {
-	GetThread(threadId string, page string) (*model.Thread, error)
+	GetThread(threadId string, page *string) (*model.Thread, error)
 	CreateThread(thread model.Thread) (*model.Thread, error)
 	CreateThreadPost(post model.Post) (*model.Post, error)
 	UpdateThreadPost(post model.Post) error
@@ -28,10 +28,14 @@ type ThreadRepositoryImpl struct {
 	CommunityCategoryId string
 }
 
-func (threadRepository *ThreadRepositoryImpl) GetThread(threadId string, page string) (*model.Thread, error) {
+func (threadRepository *ThreadRepositoryImpl) GetThread(threadId string, page *string) (*model.Thread, error) {
 	bearerToken := threadRepository.ReadApiToken
 	method := http.MethodGet
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicPath + threadId + "?sort=newest_to_oldest&page=" + page
+	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicPath + threadId + "?sort=newest_to_oldest"
+
+	if page != nil {
+		endpointUrl = endpointUrl + "&page=" + *page
+	}
 
 	response, err := util.Request(util.RequestOptions{
 		Method:      method,
