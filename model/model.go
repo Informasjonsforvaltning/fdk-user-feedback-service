@@ -20,11 +20,12 @@ type User struct {
 }
 
 type Thread struct {
-	ThreadId  *string `json:"tid"`
-	Title     *string `json:"title"`
-	Posts     []*Post `json:"posts"`
-	Timestamp *int    `json:"timestamp"`
-	Content   *string
+	ThreadId   *string `json:"tid"`
+	Title      *string `json:"title"`
+	Posts      []*Post `json:"posts"`
+	Timestamp  *int    `json:"timestamp"`
+	Content    *string
+	Pagination *Pagination `json:"pagination"`
 }
 
 type Post struct {
@@ -63,10 +64,12 @@ type UserDTO struct {
 }
 
 type ThreadDTO struct {
-	ThreadId  *json.Number `json:"tid"`
-	Title     *string      `json:"title"`
-	Posts     []*PostDTO   `json:"posts"`
-	Timestamp *json.Number `json:"timestamp"`
+	ThreadId   *json.Number   `json:"tid"`
+	Title      *string        `json:"title"`
+	Posts      []*PostDTO     `json:"posts"`
+	Timestamp  *json.Number   `json:"timestamp"`
+	Pagination *PaginationDTO `json:"pagination"`
+	PostCount  *json.Number   `json:"postcount"`
 }
 
 type PostDTO struct {
@@ -78,4 +81,15 @@ type PostDTO struct {
 	Timestamp *json.Number `json:"timestamp"`
 	Deleted   *json.Number `json:"deleted"`
 	UserInfo  *UserDTO     `json:"user"`
+}
+
+type PaginationDTO struct {
+	CurrentPage *json.Number `json:"currentPage"`
+	PageCount   *json.Number `json:"pageCount"`
+}
+
+type Pagination struct {
+	CurrentPage *int `json:"currentPage"`
+	PageCount   *int `json:"pageCount"`
+	TotalPosts  *int `json:"totalPosts"`
 }
