@@ -50,6 +50,70 @@ func TestUserFeedbackService(t *testing.T) {
 		}
 	})
 
+	t.Run("Get page 2 of posts", func(t *testing.T) {
+		entityIds, _, threadMap, mockJwkStore := ConfigureIntegrationTests()
+		defer mockJwkStore.Close()
+
+		currentEntity := entityIds[0]
+		expectedStatusCode := http.StatusOK
+		expectedResponse := threadMap[currentEntity]
+
+		w := tests.MockResponseWriter{}
+		r, _ := http.NewRequest(
+			http.MethodGet,
+			fmt.Sprint(endpointUrl+routePath+"/"+currentEntity+"?page=2"),
+			nil,
+		)
+		controller.CurrentController.GetComments(&w, r)
+
+		if w.CurrentStatusCode != expectedStatusCode {
+			t.Fatalf("expected statuscode %d, got %d", expectedStatusCode, w.CurrentStatusCode)
+		}
+
+		var actualResponse model.ThreadDTO
+		err := json.Unmarshal(w.CurrentWriteOutput, &actualResponse)
+
+		if err != nil {
+			t.Fatal("error decoding response")
+		}
+
+		if reflect.DeepEqual(actualResponse.ToThread(), expectedResponse) {
+			t.Fatalf("Expected: %#v\nGot: %#v", expectedResponse, actualResponse)
+		}
+	})
+
+	t.Run("Get page 3 of posts", func(t *testing.T) {
+		entityIds, _, threadMap, mockJwkStore := ConfigureIntegrationTests()
+		defer mockJwkStore.Close()
+
+		currentEntity := entityIds[0]
+		expectedStatusCode := http.StatusOK
+		expectedResponse := threadMap["99"]
+
+		w := tests.MockResponseWriter{}
+		r, _ := http.NewRequest(
+			http.MethodGet,
+			fmt.Sprint(endpointUrl+routePath+"/"+currentEntity+"?page=3"),
+			nil,
+		)
+		controller.CurrentController.GetComments(&w, r)
+
+		if w.CurrentStatusCode != expectedStatusCode {
+			t.Fatalf("expected statuscode %d, got %d", expectedStatusCode, w.CurrentStatusCode)
+		}
+
+		var actualResponse model.ThreadDTO
+		err := json.Unmarshal(w.CurrentWriteOutput, &actualResponse)
+
+		if err != nil {
+			t.Fatal("error decoding response")
+		}
+
+		if reflect.DeepEqual(actualResponse.ToThread(), expectedResponse) {
+			t.Fatalf("Expected: %#v\nGot: %#v", expectedResponse, actualResponse)
+		}
+	})
+
 	t.Run("Get posts for entity without thread", func(t *testing.T) {
 		entityIds, _, _, mockJwkStore := ConfigureIntegrationTests()
 		defer mockJwkStore.Close()

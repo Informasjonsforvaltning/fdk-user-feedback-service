@@ -183,7 +183,7 @@ func TestGetThread(t *testing.T) {
 		mockThreadRepository.MockGetError = errors.New("testerror")
 		expectedStatusCode := http.StatusNotFound
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", "1")
 
 		if actualThread != expectedThread || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)
@@ -196,7 +196,7 @@ func TestGetThread(t *testing.T) {
 		var expectedThread *model.Thread
 		expectedStatusCode := http.StatusNotFound
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", "1")
 
 		if actualThread != expectedThread || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)
@@ -213,7 +213,7 @@ func TestGetThread(t *testing.T) {
 		expectedStatusCode := http.StatusOK
 		mockThreadRepository.MockGetThread = &expectedThread
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", "1")
 
 		if !reflect.DeepEqual(*actualThread, expectedThread) || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)

@@ -37,8 +37,12 @@ func ConfigureIntegrationTests() ([]string, []string, map[string]*model.Thread, 
 		createPost(postIds[1], threadIds[0], userIds[0], "Interesting comment.", &postIds[0]),
 	})
 
+	empty_thread_id := "99"
+	empty_thread := createThread(empty_thread_id, "Tomt testdatasett", []*model.Post{})
+
 	threadMap := map[string]*model.Thread{
-		threadIds[0]: thread_0,
+		threadIds[0]:    thread_0,
+		empty_thread_id: empty_thread,
 	}
 
 	userIdMap := map[string]string{

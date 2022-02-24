@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/Informasjonsforvaltning/fdk-user-feedback-service/model"
@@ -150,6 +151,17 @@ func ParseRequestUrlPath(requestPath string) (*string, *string, *string) {
 	}
 
 	return route, entityId, threadId
+}
+
+func GetPageQueryParam(queryParams url.Values) string {
+	var page = queryParams.Get("page")
+
+	parsedPage, err := strconv.Atoi(page)
+	if err != nil || parsedPage < 1 {
+		return "1"
+	}
+
+	return page
 }
 
 func DecodePost(body io.ReadCloser) (*model.Post, error) {
