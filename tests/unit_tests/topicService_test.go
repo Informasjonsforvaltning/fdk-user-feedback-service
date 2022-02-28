@@ -183,7 +183,7 @@ func TestGetThread(t *testing.T) {
 		mockThreadRepository.MockGetError = errors.New("testerror")
 		expectedStatusCode := http.StatusNotFound
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", nil, nil)
 
 		if actualThread != expectedThread || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)
@@ -196,7 +196,7 @@ func TestGetThread(t *testing.T) {
 		var expectedThread *model.Thread
 		expectedStatusCode := http.StatusNotFound
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", nil, nil)
 
 		if actualThread != expectedThread || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)
@@ -213,7 +213,7 @@ func TestGetThread(t *testing.T) {
 		expectedStatusCode := http.StatusOK
 		mockThreadRepository.MockGetThread = &expectedThread
 
-		actualThread, actualStatusCode := threadService.GetThread("")
+		actualThread, actualStatusCode := threadService.GetThread("", nil, nil)
 
 		if !reflect.DeepEqual(*actualThread, expectedThread) || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedThread, expectedStatusCode, actualThread, actualStatusCode)
@@ -233,7 +233,7 @@ func TestUpdateThreadPost(t *testing.T) {
 
 		actualPost, actualStatusCode := threadService.UpdateThreadPost(model.Post{
 			ThreadId: &threadId,
-		})
+		}, nil)
 
 		if actualPost != expectedPost || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedPost, expectedStatusCode, actualPost, actualStatusCode)
@@ -251,7 +251,7 @@ func TestUpdateThreadPost(t *testing.T) {
 
 		actualPost, actualStatusCode := threadService.UpdateThreadPost(model.Post{
 			ThreadId: &threadId,
-		})
+		}, nil)
 
 		if actualPost != expectedPost || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedPost, expectedStatusCode, actualPost, actualStatusCode)
@@ -275,7 +275,7 @@ func TestUpdateThreadPost(t *testing.T) {
 			ThreadId: &threadId,
 			PostId:   &postId,
 			UserId:   &otherUserId,
-		})
+		}, nil)
 
 		if actualPost != expectedPost || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedPost, expectedStatusCode, actualPost, actualStatusCode)
@@ -300,7 +300,7 @@ func TestUpdateThreadPost(t *testing.T) {
 			ThreadId: &threadId,
 			PostId:   &postId,
 			UserId:   &userId,
-		})
+		}, nil)
 
 		if actualPost != expectedPost || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedPost, expectedStatusCode, actualPost, actualStatusCode)
@@ -325,7 +325,7 @@ func TestUpdateThreadPost(t *testing.T) {
 			Posts: posts,
 		}
 
-		actualPost, actualStatusCode := threadService.UpdateThreadPost(expectedPost)
+		actualPost, actualStatusCode := threadService.UpdateThreadPost(expectedPost, nil)
 
 		if *actualPost != expectedPost || actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %#v, %d. Got: %#v, %d", expectedPost, expectedStatusCode, actualPost, actualStatusCode)
@@ -344,7 +344,7 @@ func TestDeleteThreadPost(t *testing.T) {
 
 		actualStatusCode := threadService.DeleteThreadPost(model.Post{
 			ThreadId: &threadID,
-		})
+		}, nil)
 
 		if actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %d. Got: %d", expectedStatusCode, actualStatusCode)
@@ -361,7 +361,7 @@ func TestDeleteThreadPost(t *testing.T) {
 
 		actualStatusCode := threadService.DeleteThreadPost(model.Post{
 			ThreadId: &threadID,
-		})
+		}, nil)
 
 		if actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %d. Got: %d", expectedStatusCode, actualStatusCode)
@@ -384,7 +384,7 @@ func TestDeleteThreadPost(t *testing.T) {
 			ThreadId: &threadId,
 			PostId:   &postId,
 			UserId:   &otherUserId,
-		})
+		}, nil)
 
 		if actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %d. Got: %d", expectedStatusCode, actualStatusCode)
@@ -408,7 +408,7 @@ func TestDeleteThreadPost(t *testing.T) {
 			ThreadId: &threadId,
 			PostId:   &postId,
 			UserId:   &userId,
-		})
+		}, nil)
 
 		if actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %d. Got: %d", expectedStatusCode, actualStatusCode)
@@ -432,7 +432,7 @@ func TestDeleteThreadPost(t *testing.T) {
 			Posts: posts,
 		}
 
-		actualStatusCode := threadService.DeleteThreadPost(expectedPost)
+		actualStatusCode := threadService.DeleteThreadPost(expectedPost, nil)
 
 		if actualStatusCode != expectedStatusCode {
 			t.Fatalf("expected post response and status code: %d. Got: %d", expectedStatusCode, actualStatusCode)

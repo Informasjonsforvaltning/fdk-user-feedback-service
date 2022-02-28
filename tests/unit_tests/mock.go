@@ -35,7 +35,7 @@ type MockThreadRepository struct {
 	MockGetError  error
 }
 
-func (m *MockThreadRepository) GetThread(threadId string) (*model.Thread, error) {
+func (m *MockThreadRepository) GetThread(threadId string, page *string, postIndex *string) (*model.Thread, error) {
 	return m.MockGetThread, m.MockGetError
 }
 func (m *MockThreadRepository) CreateThread(thread model.Thread) (*model.Thread, error) {
@@ -110,13 +110,13 @@ func (m *MockThreadService) CreateThreadPost(postRequest model.Post) (*model.Pos
 func (m *MockThreadService) CreateThread(forEntityId string) (*model.Thread, int) {
 	return m.MockThread, m.MockStatusCode
 }
-func (m *MockThreadService) GetThread(id string) (*model.Thread, int) {
+func (m *MockThreadService) GetThread(id string, page *string, postIndex *string) (*model.Thread, int) {
 	return m.MockThread, m.MockStatusCode
 }
-func (m *MockThreadService) UpdateThreadPost(updatedPost model.Post) (*model.Post, int) {
+func (m *MockThreadService) UpdateThreadPost(updatedPost model.Post, postIndex *string) (*model.Post, int) {
 	return m.MockPost, m.MockStatusCode
 }
-func (m *MockThreadService) DeleteThreadPost(postToDelete model.Post) int {
+func (m *MockThreadService) DeleteThreadPost(postToDelete model.Post, postIndex *string) int {
 	return m.MockStatusCode
 }
 
@@ -124,6 +124,6 @@ func (m *MockThreadService) CreatePostForEntityId(postRequest model.Post, entity
 	return m.MockPost, m.MockStatusCode
 }
 
-func (m *MockThreadService) GetThreadByEntityId(entityId string) (*model.Thread, int) {
+func (m *MockThreadService) GetThreadByEntityId(entityId string, page *string) (*model.Thread, int) {
 	return m.MockThread, m.MockStatusCode
 }

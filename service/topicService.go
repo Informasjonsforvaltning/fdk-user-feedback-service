@@ -12,11 +12,11 @@ import (
 type ThreadService interface {
 	CreateThreadPost(postRequest model.Post) (*model.Post, int)
 	CreateThread(forEntityId string) (*model.Thread, int)
-	GetThread(id string) (*model.Thread, int)
-	UpdateThreadPost(updatedPost model.Post) (*model.Post, int)
-	DeleteThreadPost(postToDelete model.Post) int
+	GetThread(id string, page *string, postIndex *string) (*model.Thread, int)
+	UpdateThreadPost(updatedPost model.Post, postIndex *string) (*model.Post, int)
+	DeleteThreadPost(postToDelete model.Post, postIndex *string) int
 	CreatePostForEntityId(postRequest model.Post, entityId string) (*model.Post, int)
-	GetThreadByEntityId(entityId string) (*model.Thread, int)
+	GetThreadByEntityId(entityId string, page *string) (*model.Thread, int)
 }
 
 type ThreadServiceImpl struct {
@@ -61,13 +61,13 @@ func (threadService *ThreadServiceImpl) CreatePostForEntityId(postRequest model.
 	return created, http.StatusCreated
 }
 
-func (threadService *ThreadServiceImpl) GetThreadByEntityId(entityId string) (*model.Thread, int) {
+func (threadService *ThreadServiceImpl) GetThreadByEntityId(entityId string, page *string) (*model.Thread, int) {
 	threadId, err := threadService.ThreadIdService.GetThreadId(entityId)
 	if err != nil || threadId == nil {
 		return nil, http.StatusNotFound
 	}
 
-	thread, statusCode := threadService.GetThread(*threadId)
+	thread, statusCode := threadService.GetThread(*threadId, page, nil)
 	if !util.SuccsessfulStatus(statusCode) || thread == nil {
 		return nil, statusCode
 	}
@@ -114,8 +114,8 @@ func (threadService *ThreadServiceImpl) CreateThread(forEntityId string) (*model
 	return createdThread, http.StatusCreated
 }
 
-func (threadService *ThreadServiceImpl) GetThread(id string) (*model.Thread, int) {
-	thread, err := threadService.ThreadRepository.GetThread(id)
+func (threadService *ThreadServiceImpl) GetThread(id string, page *string, postIndex *string) (*model.Thread, int) {
+	thread, err := threadService.ThreadRepository.GetThread(id, page, postIndex)
 	if err != nil || thread == nil {
 		log.Println("GetThread error.\n[ERROR] -", err)
 		return nil, http.StatusNotFound
@@ -126,8 +126,8 @@ func (threadService *ThreadServiceImpl) GetThread(id string) (*model.Thread, int
 	return filteredThread, http.StatusOK
 }
 
-func (threadService *ThreadServiceImpl) UpdateThreadPost(updatedPost model.Post) (*model.Post, int) {
-	thread, statusCode := threadService.GetThread(*updatedPost.ThreadId)
+func (threadService *ThreadServiceImpl) UpdateThreadPost(updatedPost model.Post, postIndex *string) (*model.Post, int) {
+	thread, statusCode := threadService.GetThread(*updatedPost.ThreadId, nil, postIndex)
 	if !util.SuccsessfulStatus(statusCode) {
 		return nil, statusCode
 	}
@@ -152,8 +152,8 @@ func (threadService *ThreadServiceImpl) UpdateThreadPost(updatedPost model.Post)
 	return &updatedPost, http.StatusOK
 }
 
-func (threadService *ThreadServiceImpl) DeleteThreadPost(postToDelete model.Post) int {
-	thread, statusCode := threadService.GetThread(*postToDelete.ThreadId)
+func (threadService *ThreadServiceImpl) DeleteThreadPost(postToDelete model.Post, postIndex *string) int {
+	thread, statusCode := threadService.GetThread(*postToDelete.ThreadId, nil, postIndex)
 	if !util.SuccsessfulStatus(statusCode) {
 		return statusCode
 	}

@@ -75,7 +75,7 @@ func (controller *ControllerImpl) GetComments(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	thread, statusCode := controller.ThreadService.GetThreadByEntityId(*entityId)
+	thread, statusCode := controller.ThreadService.GetThreadByEntityId(*entityId, util.GetPageQueryParam(r.URL.Query()))
 	if !util.SuccsessfulStatus(statusCode) || thread == nil {
 		w.WriteHeader(statusCode)
 		return
@@ -126,7 +126,7 @@ func (controller *ControllerImpl) UpdateComment(w http.ResponseWriter, r *http.R
 		ThreadId: threadId,
 		Content:  post.Content,
 		ToPostId: post.ToPostId,
-	})
+	}, util.GetPostIndexQueryParam(r.URL.Query()))
 	if !util.SuccsessfulStatus(statusCode) {
 		w.WriteHeader(statusCode)
 		return
@@ -164,7 +164,7 @@ func (controller *ControllerImpl) DeleteComment(w http.ResponseWriter, r *http.R
 		PostId:   postId,
 		UserId:   user.UserId,
 		ThreadId: threadId,
-	})
+	}, util.GetPostIndexQueryParam(r.URL.Query()))
 
 	w.WriteHeader(statusCode)
 }
