@@ -51,6 +51,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: page
+          in: path
+          description: page of posts
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -116,6 +122,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: postIndex
+          in: path
+          description: index of post in thread
+          required: false
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -150,6 +162,12 @@ paths:
           in: path
           description: post id
           required: true
+          schema:
+            type: string
+        - name: postIndex
+          in: path
+          description: index of post in thread
+          required: false
           schema:
             type: string
       responses:

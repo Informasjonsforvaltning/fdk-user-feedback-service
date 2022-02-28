@@ -57,11 +57,12 @@ func (thread *Thread) FilterDeletedPosts() *Thread {
 	}
 
 	return &Thread{
-		ThreadId:  thread.ThreadId,
-		Title:     thread.Title,
-		Posts:     posts,
-		Timestamp: thread.Timestamp,
-		Content:   thread.Content,
+		ThreadId:   thread.ThreadId,
+		Title:      thread.Title,
+		Posts:      posts,
+		Timestamp:  thread.Timestamp,
+		Content:    thread.Content,
+		Pagination: thread.Pagination,
 	}
 }
 
@@ -73,6 +74,7 @@ func (threadDto *ThreadDTO) ToThread() *Thread {
 	threadId := NumberPointerToStringPointer(threadDto.ThreadId)
 	title := threadDto.Title
 	timestamp := NumberPointerToIntPointer(threadDto.Timestamp)
+	pagination := ToPagination(threadDto)
 
 	var posts []*Post
 	for _, postDto := range threadDto.Posts {
@@ -80,10 +82,32 @@ func (threadDto *ThreadDTO) ToThread() *Thread {
 	}
 
 	return &Thread{
-		ThreadId:  threadId,
-		Title:     title,
-		Posts:     posts,
-		Timestamp: timestamp,
+		ThreadId:   threadId,
+		Title:      title,
+		Posts:      posts,
+		Timestamp:  timestamp,
+		Pagination: pagination,
+	}
+}
+
+func ToPagination(threadDto *ThreadDTO) *Pagination {
+	if threadDto == nil {
+		return nil
+	}
+
+	paginationDto := threadDto.Pagination
+	if paginationDto == nil {
+		return nil
+	}
+
+	currentPage := NumberPointerToIntPointer(paginationDto.CurrentPage)
+	pageCount := NumberPointerToIntPointer(paginationDto.PageCount)
+	totalPosts := NumberPointerToIntPointer(threadDto.PostCount)
+
+	return &Pagination{
+		CurrentPage: currentPage,
+		PageCount:   pageCount,
+		TotalPosts:  totalPosts,
 	}
 }
 
@@ -120,6 +144,7 @@ func (postDto *PostDTO) ToPost() *Post {
 	postId := NumberPointerToStringPointer(postDto.PostId)
 	userId := NumberPointerToStringPointer(postDto.UserId)
 	threadId := NumberPointerToStringPointer(postDto.ThreadId)
+	index := NumberPointerToStringPointer(postDto.Index)
 	timestamp := NumberPointerToIntPointer(postDto.Timestamp)
 	deletedVal := NumberPointerToStringPointer(postDto.Deleted)
 	deleted := deletedVal != nil && *deletedVal == "1"
@@ -128,6 +153,7 @@ func (postDto *PostDTO) ToPost() *Post {
 		PostId:    postId,
 		UserId:    userId,
 		ThreadId:  threadId,
+		Index:     index,
 		Content:   postDto.Content,
 		ToPostId:  toPostId,
 		Timestamp: timestamp,
