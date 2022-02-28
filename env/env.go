@@ -51,7 +51,7 @@ var ConstantValues = Constants{
 	UserByEmailPath:     "user/email/",
 	TopicPath:           "topic/",
 	TopicsPath:          "v2/topics/",
-	ThreadSlugPath:      "thread-slug/",
+	ThreadSlugPath:      "/thread-slug/",
 	PostsPath:           "v2/posts/",
 	FirestoreProjectId:  "digdir-cloud-functions",
 	FirestoreCollection: "threadIds",
