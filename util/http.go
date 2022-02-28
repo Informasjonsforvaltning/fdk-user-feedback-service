@@ -164,6 +164,17 @@ func GetPageQueryParam(queryParams url.Values) *string {
 	return &page
 }
 
+func GetPostIndexQueryParam(queryParams url.Values) *string {
+	var postIndex = queryParams.Get("postIndex")
+
+	indexInt, err := strconv.Atoi(postIndex)
+	if err != nil || indexInt < 1 {
+		return nil
+	}
+
+	return &postIndex
+}
+
 func DecodePost(body io.ReadCloser) (*model.Post, error) {
 	var post model.Post
 	err := json.NewDecoder(body).Decode(&post)

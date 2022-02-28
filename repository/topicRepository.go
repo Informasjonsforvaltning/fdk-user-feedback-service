@@ -10,7 +10,7 @@ import (
 )
 
 type ThreadRepository interface {
-	GetThread(threadId string, page *string) (*model.Thread, error)
+	GetThread(threadId string, page *string, postIndex *string) (*model.Thread, error)
 	CreateThread(thread model.Thread) (*model.Thread, error)
 	CreateThreadPost(post model.Post) (*model.Post, error)
 	UpdateThreadPost(post model.Post) error
@@ -24,17 +24,23 @@ type ThreadRepositoryImpl struct {
 	TopicPath           string
 	TopicsPath          string
 	PostsPath           string
+	ThreadSlugPath      string
 	ThreadBotUid        string
 	CommunityCategoryId string
 }
 
-func (threadRepository *ThreadRepositoryImpl) GetThread(threadId string, page *string) (*model.Thread, error) {
+func (threadRepository *ThreadRepositoryImpl) GetThread(threadId string, page *string, postIndex *string) (*model.Thread, error) {
 	bearerToken := threadRepository.ReadApiToken
 	method := http.MethodGet
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicPath + threadId + "?sort=newest_to_oldest"
+	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicPath + threadId
+	sortParam := "?sort=newest_to_oldest"
 
 	if page != nil {
-		endpointUrl = endpointUrl + "&page=" + *page
+		endpointUrl = endpointUrl + sortParam + "&page=" + *page
+	} else if postIndex != nil {
+		endpointUrl = endpointUrl + threadRepository.ThreadSlugPath + *postIndex + sortParam
+	} else {
+		endpointUrl = endpointUrl + sortParam
 	}
 
 	response, err := util.Request(util.RequestOptions{

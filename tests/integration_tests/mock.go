@@ -41,7 +41,7 @@ type MockThreadRepository struct {
 	ThreadMap map[string]*model.Thread
 }
 
-func (m *MockThreadRepository) GetThread(threadId string, page *string) (*model.Thread, error) {
+func (m *MockThreadRepository) GetThread(threadId string, page *string, postIndex *string) (*model.Thread, error) {
 	var pagedId string
 	if page == nil || *page == "1" || *page == "2" {
 		pagedId = threadId
@@ -66,7 +66,7 @@ func (m *MockThreadRepository) CreateThread(thread model.Thread) (*model.Thread,
 	return &savedThread, nil
 }
 func (m *MockThreadRepository) CreateThreadPost(post model.Post) (*model.Post, error) {
-	thread, err := m.GetThread(*post.ThreadId, nil)
+	thread, err := m.GetThread(*post.ThreadId, nil, nil)
 	if err != nil {
 		return nil, err
 	}

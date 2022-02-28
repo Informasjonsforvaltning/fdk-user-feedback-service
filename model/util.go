@@ -144,6 +144,7 @@ func (postDto *PostDTO) ToPost() *Post {
 	postId := NumberPointerToStringPointer(postDto.PostId)
 	userId := NumberPointerToStringPointer(postDto.UserId)
 	threadId := NumberPointerToStringPointer(postDto.ThreadId)
+	index := NumberPointerToStringPointer(postDto.Index)
 	timestamp := NumberPointerToIntPointer(postDto.Timestamp)
 	deletedVal := NumberPointerToStringPointer(postDto.Deleted)
 	deleted := deletedVal != nil && *deletedVal == "1"
@@ -152,6 +153,7 @@ func (postDto *PostDTO) ToPost() *Post {
 		PostId:    postId,
 		UserId:    userId,
 		ThreadId:  threadId,
+		Index:     index,
 		Content:   postDto.Content,
 		ToPostId:  toPostId,
 		Timestamp: timestamp,

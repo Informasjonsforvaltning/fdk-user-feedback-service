@@ -32,6 +32,7 @@ type Post struct {
 	PostId    *string `json:"pid"`
 	UserId    *string `json:"uid"`
 	ThreadId  *string `json:"tid"`
+	Index     *string `json:"index"`
 	Content   *string `json:"content"`
 	ToPostId  *string `json:"toPid"`
 	Timestamp *int    `json:"timestamp"`
@@ -76,6 +77,7 @@ type PostDTO struct {
 	PostId    *json.Number `json:"pid"`
 	UserId    *json.Number `json:"uid"`
 	ThreadId  *json.Number `json:"tid"`
+	Index     *json.Number `json:"index"`
 	Content   *string      `json:"content"`
 	ToPostId  *string      `json:"toPid"`
 	Timestamp *json.Number `json:"timestamp"`

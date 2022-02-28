@@ -27,6 +27,7 @@ type Constants struct {
 	UserByEmailPath     string
 	TopicPath           string
 	TopicsPath          string
+	ThreadSlugPath      string
 	PostsPath           string
 	FirestoreProjectId  string
 	FirestoreCollection string
@@ -50,6 +51,7 @@ var ConstantValues = Constants{
 	UserByEmailPath:     "user/email/",
 	TopicPath:           "topic/",
 	TopicsPath:          "v2/topics/",
+	ThreadSlugPath:      "thread-slug/",
 	PostsPath:           "v2/posts/",
 	FirestoreProjectId:  "digdir-cloud-functions",
 	FirestoreCollection: "threadIds",

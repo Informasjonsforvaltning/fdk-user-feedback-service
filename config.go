@@ -23,6 +23,7 @@ func Configure() {
 		CommunityCategoryId: env.EnvironmentVariables.CommunityCategoryId,
 		TopicPath:           env.ConstantValues.TopicPath,
 		TopicsPath:          env.ConstantValues.TopicsPath,
+		ThreadSlugPath:      env.ConstantValues.ThreadSlugPath,
 		PostsPath:           env.ConstantValues.PostsPath,
 	}
 	repository.CurrentUserRepository = &repository.UserRepositoryImpl{
