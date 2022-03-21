@@ -34,14 +34,14 @@ type Constants struct {
 }
 
 var EnvironmentVariables = Environment{
-	CommunityApiUrl:     getEnv("COMMUNITY_API_URL", "https://community.staging.fellesdatakatalog.digdir.no/api/"),
+	CommunityApiUrl:     getEnv("COMMUNITY_API_URL", "https://community.staging.fellesdatakatalog.digdir.no/api"),
 	CommunityCategoryId: getEnv("COMMUNITY_CATEGORY_ID", "25"),
 	ThreadBotUid:        getEnv("TOPIC_BOT_UID", "1"),
 	ReadApiToken:        getEnv("READ_API_TOKEN", ""),
 	WriteApiToken:       getEnv("WRITE_API_TOKEN", ""),
 	SparqlServiceUrl:    getEnv("SPARQL_SERVICE_URL", "https://sparql.staging.fellesdatakatalog.digdir.no"),
-	KeycloakHost:        getEnv("KEYCLOAK_HOST", "https://sso.staging.fellesdatakatalog.digdir.no/"),
-	FdkBaseUri:          getEnv("FDK_BASE_URI", "https://www.staging.fellesdatakatalog.digdir.no/"),
+	KeycloakHost:        getEnv("KEYCLOAK_HOST", "https://sso.staging.fellesdatakatalog.digdir.no"),
+	FdkBaseUri:          getEnv("FDK_BASE_URI", "https://www.staging.fellesdatakatalog.digdir.no"),
 	FirestoreCollection: getEnv("FIRESTORE_COLLECTION", "threadIds_staging"),
 }
 

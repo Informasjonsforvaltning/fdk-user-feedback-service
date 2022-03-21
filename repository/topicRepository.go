@@ -32,7 +32,7 @@ type ThreadRepositoryImpl struct {
 func (threadRepository *ThreadRepositoryImpl) GetThread(threadId string, page *string, postIndex *string) (*model.Thread, error) {
 	bearerToken := threadRepository.ReadApiToken
 	method := http.MethodGet
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicPath + threadId
+	endpointUrl := threadRepository.CommunityApiUrl + "/" + threadRepository.TopicPath + threadId
 	sortParam := "?sort=newest_to_oldest"
 
 	if page != nil {
@@ -64,7 +64,7 @@ func (threadRepository *ThreadRepositoryImpl) CreateThread(thread model.Thread) 
 
 	bearerToken := threadRepository.WriteApiToken
 	method := http.MethodPost
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicsPath
+	endpointUrl := threadRepository.CommunityApiUrl + "/" + threadRepository.TopicsPath
 
 	postBody := map[string]string{
 		"_uid":    threadRepository.ThreadBotUid,
@@ -101,7 +101,7 @@ func (threadRepository *ThreadRepositoryImpl) CreateThreadPost(post model.Post) 
 
 	bearerToken := threadRepository.WriteApiToken
 	method := http.MethodPost
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.TopicsPath + *post.ThreadId
+	endpointUrl := threadRepository.CommunityApiUrl + "/" + threadRepository.TopicsPath + *post.ThreadId
 
 	postBody := map[string]string{
 		"_uid":    *post.UserId,
@@ -135,7 +135,7 @@ func (threadRepository *ThreadRepositoryImpl) UpdateThreadPost(post model.Post) 
 
 	bearerToken := threadRepository.WriteApiToken
 	method := http.MethodPut
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.PostsPath + *post.PostId
+	endpointUrl := threadRepository.CommunityApiUrl + "/" + threadRepository.PostsPath + *post.PostId
 
 	putBody := map[string]string{
 		"_uid":    *post.UserId,
@@ -161,7 +161,7 @@ func (threadRepository *ThreadRepositoryImpl) DeleteThreadPost(post model.Post) 
 
 	bearerToken := threadRepository.WriteApiToken
 	method := http.MethodDelete
-	endpointUrl := threadRepository.CommunityApiUrl + threadRepository.PostsPath + *post.PostId + "/state"
+	endpointUrl := threadRepository.CommunityApiUrl + "/" + threadRepository.PostsPath + *post.PostId + "/state"
 
 	deleteBody := map[string]string{
 		"_uid": *post.UserId,

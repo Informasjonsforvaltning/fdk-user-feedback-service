@@ -19,7 +19,7 @@ func fdkLink(entityType EntityType, entityId string) *string {
 	if entityBasePath == nil || entityId == "" {
 		return nil
 	}
-	path = env.EnvironmentVariables.FdkBaseUri + *entityBasePath + entityId
+	path = env.EnvironmentVariables.FdkBaseUri + "/" + *entityBasePath + entityId
 	return &path
 }
 
