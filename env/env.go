@@ -18,19 +18,19 @@ type Environment struct {
 	SparqlServiceUrl    string
 	KeycloakHost        string
 	FdkBaseUri          string
+	FirestoreCollection string
 }
 
 type Constants struct {
-	PingPath            string
-	CurrentUserPath     string
-	ThreadPath          string
-	UserByEmailPath     string
-	TopicPath           string
-	TopicsPath          string
-	ThreadSlugPath      string
-	PostsPath           string
-	FirestoreProjectId  string
-	FirestoreCollection string
+	PingPath           string
+	CurrentUserPath    string
+	ThreadPath         string
+	UserByEmailPath    string
+	TopicPath          string
+	TopicsPath         string
+	ThreadSlugPath     string
+	PostsPath          string
+	FirestoreProjectId string
 }
 
 var EnvironmentVariables = Environment{
@@ -42,17 +42,17 @@ var EnvironmentVariables = Environment{
 	SparqlServiceUrl:    getEnv("SPARQL_SERVICE_URL", "https://sparql.staging.fellesdatakatalog.digdir.no"),
 	KeycloakHost:        getEnv("KEYCLOAK_HOST", "https://sso.staging.fellesdatakatalog.digdir.no/"),
 	FdkBaseUri:          getEnv("FDK_BASE_URI", "https://www.staging.fellesdatakatalog.digdir.no/"),
+	FirestoreCollection: getEnv("FIRESTORE_COLLECTION", "threadIds_staging"),
 }
 
 var ConstantValues = Constants{
-	PingPath:            "ping",
-	CurrentUserPath:     "current-user",
-	ThreadPath:          "thread",
-	UserByEmailPath:     "user/email/",
-	TopicPath:           "topic/",
-	TopicsPath:          "v2/topics/",
-	ThreadSlugPath:      "/thread-slug/",
-	PostsPath:           "v2/posts/",
-	FirestoreProjectId:  "digdir-cloud-functions",
-	FirestoreCollection: "threadIds",
+	PingPath:           "ping",
+	CurrentUserPath:    "current-user",
+	ThreadPath:         "thread",
+	UserByEmailPath:    "user/email/",
+	TopicPath:          "topic/",
+	TopicsPath:         "v2/topics/",
+	ThreadSlugPath:     "/thread-slug/",
+	PostsPath:          "v2/posts/",
+	FirestoreProjectId: "digdir-cloud-functions",
 }

@@ -13,7 +13,7 @@ func Configure() {
 	}
 	repository.CurrentThreadIdRepository = &repository.ThreadIdRepositoryImpl{
 		FirestoreProjectId:    env.ConstantValues.FirestoreProjectId,
-		FirestoreCollectionId: env.ConstantValues.FirestoreCollection,
+		FirestoreCollectionId: env.EnvironmentVariables.FirestoreCollection,
 	}
 	repository.CurrentThreadRepository = &repository.ThreadRepositoryImpl{
 		WriteApiToken:       env.EnvironmentVariables.WriteApiToken,
