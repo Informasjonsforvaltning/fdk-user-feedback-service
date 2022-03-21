@@ -19,7 +19,7 @@ tags:
   - name: post
     description: A feedback instance
 servers:
-  - url: 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service'
+  - url: 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service-prod'
     description: production
   - url: 'https://europe-west1-digdir-cloud-functions.cloudfunctions.net/user-feedback-service-staging'
     description: staging
