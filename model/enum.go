@@ -83,17 +83,17 @@ func (e EntityType) ToPath() *string {
 	var path string
 	switch e {
 	case Dataset:
-		path = "datasets/"
+		path = "/datasets/"
 	case DataService:
-		path = "dataservices/"
+		path = "/dataservices/"
 	case Concept:
-		path = "concepts/"
+		path = "/concepts/"
 	case InformationModel:
-		path = "informationmodels/"
+		path = "/informationmodels/"
 	case PublicService:
-		path = "public-services-and-events/"
+		path = "/public-services-and-events/"
 	case Event:
-		path = "events/"
+		path = "/events/"
 	default:
 		return nil
 	}
