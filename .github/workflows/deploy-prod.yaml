@@ -30,7 +30,7 @@ jobs:
       - name: Deploy
         uses: google-github-actions/deploy-cloud-functions@main
         with:
-          name: user-feedback-service
+          name: user-feedback-service-prod
           runtime: go116
           entry_point: EntryPoint
           memory_mb: 256
@@ -44,7 +44,7 @@ jobs:
           mention: 'channel'
           if_mention: failure
           status: ${{ job.status }}
-          author_name: 'Application: fdk-user-feedback-service'
+          author_name: 'Application: fdk-user-feedback-service-prod'
           fields: commit,author,workflow,message
         env:
           GITHUB_TOKEN: ${{ github.token }}
