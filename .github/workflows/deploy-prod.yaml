@@ -1,4 +1,4 @@
-name: Deploy cloud function to production
+name: Deploy prod-function
 
 on:
   push:
@@ -6,47 +6,21 @@ on:
       -  main
 
 jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.16.12
-
-      - name: Test
-        run: go test -v ./...
-
-      - name: Auth gcloud CLI for deploy
-        uses: google-github-actions/auth@main
-        with:
-          credentials_json: ${{ secrets.DIGDIR_CLOUD_FUNCTIONS_SA_KEY }}
-
-      - name: Deploy
-        uses: google-github-actions/deploy-cloud-functions@main
-        with:
-          name: user-feedback-service-prod
-          runtime: go116
-          entry_point: EntryPoint
-          memory_mb: 256
-          region: europe-west1
-          max_instances: 1
-          env_vars: ${{ secrets.ENV_VARS }}
-
-      - name: Notify slack
-        uses: 8398a7/action-slack@v3
-        with:
-          mention: 'channel'
-          if_mention: failure
-          status: ${{ job.status }}
-          author_name: 'Application: fdk-user-feedback-service-prod'
-          fields: commit,author,workflow,message
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+  build-and-deploy-production:
+    name: Deploy to prod on merge to main branch
+    uses: Informasjonsforvaltning/workflows/.github/workflows/deploy-cloud-function.yaml@main
+    with:
+      app_name: user-feedback-service-prod
+      entry_point: EntryPoint
+      environment: prod
+      go-version: 1.16.12
+      go-test-cmd: '-v ./...'
+      max_instances: 1
+      memory: 256
+      region: europe-west1
+      runtime: go116
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DIGDIR_CLOUD_FUNCTIONS_SA_KEY: ${{ secrets.DIGDIR_CLOUD_FUNCTIONS_SA_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      ENV_VARS: ${{ secrets.ENV_VARS }}
