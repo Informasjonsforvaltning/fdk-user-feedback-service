@@ -23,4 +23,4 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DIGDIR_CLOUD_FUNCTIONS_SA_KEY: ${{ secrets.DIGDIR_CLOUD_FUNCTIONS_SA_KEY }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      ENV_VARS: ${{ secrets.ENV_VARS_STAGING }}
+      ENV_VARS: ${{ secrets.ENV_VARS }}
