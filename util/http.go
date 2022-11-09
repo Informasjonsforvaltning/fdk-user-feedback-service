@@ -208,7 +208,7 @@ func UnmarshalThread(bytes *[]byte) (*model.Thread, error) {
 }
 
 func UnmarshalPostResponse(bytes *[]byte) (*model.Post, error) {
-	var response model.PostResponseDAO
+	var response model.PostResponseDTO
 	if bytes == nil {
 		return nil, model.ErrNoBytes
 	}
@@ -218,11 +218,11 @@ func UnmarshalPostResponse(bytes *[]byte) (*model.Post, error) {
 		log.Println("Error on Post unmarshal.\n[ERROR] -", err)
 	}
 
-	if *response.Code != "ok" {
+	if *response.Status.Code != "ok" {
 		return nil, model.ErrBadResponse
 	}
 
-	return response.Payload.ToPost(), err
+	return response.Response.ToPost(), err
 }
 
 func UnmarshalThreadResponse(bytes *[]byte) (*model.Thread, error) {
@@ -236,11 +236,11 @@ func UnmarshalThreadResponse(bytes *[]byte) (*model.Thread, error) {
 		log.Println("Error on Post unmarshal.\n[ERROR] -", err)
 	}
 
-	if *response.Code != "ok" {
+	if *response.Status.Code != "ok" {
 		return nil, model.ErrBadResponse
 	}
 
-	return response.Payload.ThreadData.ToThread(), err
+	return response.Response.ToThread(), err
 }
 
 func UnmarshalUser(bytes *[]byte) (*model.User, error) {
