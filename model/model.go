@@ -40,19 +40,19 @@ type Post struct {
 	UserInfo  *User   `json:"user"`
 }
 
-type ThreadResponsePayload struct {
-	ThreadData *ThreadDTO `json:"topicData"`
-	PostData   *PostDTO   `json:"postData"`
+type StatusDTO struct {
+	Code 	*string `json:"code"`
+	Message *string `json:"message"`
 }
 
-type PostResponseDAO struct {
-	Code    *string  `json:"code"`
-	Payload *PostDTO `json:"payload"`
+type PostResponseDTO struct {
+	Status   *StatusDTO `json:"code"`
+	Response *PostDTO 	`json:"response"`
 }
 
 type ThreadResponseDTO struct {
-	Code    *string                `json:"code"`
-	Payload *ThreadResponsePayload `json:"payload"`
+	Status   *StatusDTO `json:"status"`
+	Response *ThreadDTO `json:"response"`
 }
 type UserDTO struct {
 	UserId      *json.Number `json:"uid"`
