@@ -227,13 +227,9 @@ func UnmarshalPostResponse(bytes *[]byte) (*model.Post, error) {
 
 func UnmarshalThreadResponse(bytes *[]byte) (*model.Thread, error) {
 	var response model.ThreadResponseDTO
-	var nonNilBytes []byte
 	if bytes == nil {
 		return nil, model.ErrNoBytes
 	}
-
-	nonNilBytes = *bytes
-	log.Println("Thread response: .\n[INFO] -", string(nonNilBytes[:]))
 
 	err := json.Unmarshal(*bytes, &response)
 	if err != nil {
