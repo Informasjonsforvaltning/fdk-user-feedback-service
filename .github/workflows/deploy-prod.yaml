@@ -13,12 +13,12 @@ jobs:
       app_name: user-feedback-service-prod
       entry_point: EntryPoint
       environment: prod
-      go-version: 1.16.12
+      go-version: 1.21.4
       go-test-cmd: '-v ./...'
       max_instances: 1
       memory: 256
       region: europe-west1
-      runtime: go116
+      runtime: go121
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DIGDIR_CLOUD_FUNCTIONS_SA_KEY: ${{ secrets.DIGDIR_CLOUD_FUNCTIONS_SA_KEY }}
