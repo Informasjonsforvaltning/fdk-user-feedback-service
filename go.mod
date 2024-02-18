@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	cloud.google.com/go/firestore v1.14.0
-	github.com/GoogleCloudPlatform/functions-framework-go v1.8.0
+	github.com/GoogleCloudPlatform/functions-framework-go v1.8.1
 	github.com/Nerzal/gocloak/v10 v10.0.1
 	github.com/golang-jwt/jwt/v4 v4.5.0
 )

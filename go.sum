@@ -1306,8 +1306,8 @@ gioui.org v0.0.0-20210308172011-57750fc8a0a6/go.mod h1:RSH6KIUZ0p2xy5zHDxgAM4zum
 git.sr.ht/~sbinet/gg v0.3.1/go.mod h1:KGYtlADtqsqANL9ueOFkWymvzUvLMQllU5Ixo+8v3pc=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/GoogleCloudPlatform/functions-framework-go v1.8.0 h1:T6A2/y11ew21+jYVgM8d6MeLuzBCLIhjuYqPWamNM/8=
-github.com/GoogleCloudPlatform/functions-framework-go v1.8.0/go.mod h1:KpD6tyJWaVnELorVNG+GgBxCNZSVnyWDIZOtibAfAH0=
+github.com/GoogleCloudPlatform/functions-framework-go v1.8.1 h1:wMO6lE8uR68ReG+/XwSgjTm79o4xJ+Aj9pNnCMnQzPk=
+github.com/GoogleCloudPlatform/functions-framework-go v1.8.1/go.mod h1:kKqAKLm08tjDVs37IG/Dl4hC1/go4E85Udn1LeSdAEI=
 github.com/JohnCGriffin/overflow v0.0.0-20211019200055-46fa312c352c/go.mod h1:X0CRv0ky0k6m906ixxpzmDRLvX58TFUKS2eePweuyxk=
 github.com/Nerzal/gocloak/v10 v10.0.1 h1:W9pyD4I6w57ceNmjJoS4mXezBAxpupj11ytxper2KA8=
 github.com/Nerzal/gocloak/v10 v10.0.1/go.mod h1:18jh1lwSHEJeSvmdH+08JyJU/XjPdNYLWEZ7paDB2k8=
