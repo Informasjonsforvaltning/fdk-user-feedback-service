@@ -12,7 +12,7 @@ require (
 require (
 	github.com/cloudevents/sdk-go/v2 v2.15.0 // indirect
 	github.com/go-resty/resty/v2 v2.11.0 // indirect
-	github.com/lestrrat-go/jwx v1.2.28
+	github.com/lestrrat-go/jwx v1.2.29
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.48.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.48.0 // indirect
