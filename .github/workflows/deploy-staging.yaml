@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-deploy-staging:
     name: Call reusable workflow when pull request is created
-    if: github.event.pull_request.draft == false
+    if: ${{ github.event.pull_request.draft == false && github.actor != 'dependabot[bot]'}}
     uses: Informasjonsforvaltning/workflows/.github/workflows/deploy-cloud-function.yaml@main
     with:
       app_name: user-feedback-service-staging
