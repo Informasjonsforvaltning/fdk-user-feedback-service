@@ -15,6 +15,6 @@ jobs:
     uses: Informasjonsforvaltning/workflows/.github/workflows/codeql.yaml@main
     with:
       language: go
-      go_version: 1.21.4
+      go_version: 1.22.6
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
