@@ -3,7 +3,7 @@ module github.com/Informasjonsforvaltning/fdk-user-feedback-service
 go 1.22
 
 require (
-	cloud.google.com/go/firestore v1.16.0
+	cloud.google.com/go/firestore v1.17.0
 	github.com/GoogleCloudPlatform/functions-framework-go v1.8.0
 	github.com/Nerzal/gocloak/v10 v10.0.1
 	github.com/golang-jwt/jwt/v4 v4.5.0
@@ -38,7 +38,6 @@ require (
 	github.com/segmentio/ksuid v1.0.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.29.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
 	go.uber.org/goleak v1.3.0 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
