@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	cloud.google.com/go/firestore v1.18.0
-	github.com/GoogleCloudPlatform/functions-framework-go v1.8.0
+	github.com/GoogleCloudPlatform/functions-framework-go v1.9.1
 	github.com/Nerzal/gocloak/v10 v10.0.1
 	github.com/golang-jwt/jwt/v4 v4.5.1
 )
@@ -49,7 +49,7 @@ require (
 )
 
 require (
-	github.com/cloudevents/sdk-go/v2 v2.15.0 // indirect
+	github.com/cloudevents/sdk-go/v2 v2.15.2 // indirect
 	github.com/go-resty/resty/v2 v2.16.5 // indirect
 	github.com/lestrrat-go/jwx v1.2.28
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
