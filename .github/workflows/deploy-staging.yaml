@@ -16,7 +16,7 @@ jobs:
       app_name: user-feedback-service-staging
       entry_point: EntryPoint
       environment: staging
-      go-version: 1.22.6
+      go-version: 1.24.1
       go-test-cmd: '-v ./...'
       max_instances: 1
       memory: 256
