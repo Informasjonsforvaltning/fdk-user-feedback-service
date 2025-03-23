@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/firestore v1.18.0
 	github.com/GoogleCloudPlatform/functions-framework-go v1.8.0
 	github.com/Nerzal/gocloak/v10 v10.0.1
-	github.com/golang-jwt/jwt/v4 v4.5.1
+	github.com/golang-jwt/jwt/v4 v4.5.2
 )
 
 require (
