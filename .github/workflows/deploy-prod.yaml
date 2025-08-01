@@ -1,5 +1,6 @@
 name: Deploy prod-function
-
+permissions:
+  contents: read
 on:
   push:
     branches:
@@ -13,12 +14,12 @@ jobs:
       app_name: user-feedback-service-prod
       entry_point: EntryPoint
       environment: prod
-      go-version: 1.24.1
+      go-version: 1.24.4
       go-test-cmd: '-v ./...'
       max_instances: 1
       memory: 256
       region: europe-west1
-      runtime: go122
+      runtime: go124
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DIGDIR_CLOUD_FUNCTIONS_SA_KEY: ${{ secrets.DIGDIR_CLOUD_FUNCTIONS_SA_KEY }}
