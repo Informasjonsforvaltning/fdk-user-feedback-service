@@ -251,6 +251,7 @@ func UnmarshalUser(bytes *[]byte) (*model.User, error) {
 	err := json.Unmarshal(*bytes, &dbUser)
 	if err != nil {
 		log.Println("Error on User unmarshal.\n[ERROR] -", err)
+		log.Printf("UnmarshalUser bytes: %s", string(*bytes))
 	}
 
 	return dbUser.ToUser(), err
