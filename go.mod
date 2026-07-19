@@ -3,7 +3,7 @@ module github.com/Informasjonsforvaltning/fdk-user-feedback-service
 go 1.25.8
 
 require (
-	cloud.google.com/go/firestore v1.23.0
+	cloud.google.com/go/firestore v1.24.0
 	github.com/GoogleCloudPlatform/functions-framework-go v1.9.2
 	github.com/Nerzal/gocloak/v10 v10.0.1
 	github.com/golang-jwt/jwt/v4 v4.5.2
