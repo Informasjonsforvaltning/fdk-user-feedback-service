@@ -1,5 +1,9 @@
 # FDK User Feedback Service
 
+> [!IMPORTANT]
+> This service has been shut down and the repository is archived until further notice. It is no longer deployed
+> or maintained.
+
 This application provides an API for handling feedback on resources in the data catalog. Designed to be hosted as a
 cloud function.
 
